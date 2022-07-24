@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloud</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <div class="left"><strong>A</strong>loud</div>
+
+    <div class="center">
+        <span class="play" id="play"><i class="fa fa-play-circle"></i></span>
+        <span class="pause" id="pause"><i class="fa fa-pause-circle"></i></span>
+    </div>
+
+    <div class="right">
+        <span class="speakers-selector" id="speakers-selector"><i class="fa fa-microphone-alt"></i></span>
+    </div>
+</div>
+
+<div class="main">
+    <textarea class="text-box" id="text-box" placeholder="Type here..."></textarea>
+    <div id="close" class="close">+</div>
+</div>
+
+<select name="Speakers" id="speakers" class="speakers">
+</select>
+
+
+
+<! -- Save to Local Storage Using Git -->
+
+<script src="/app.js"></script>    
+</body>
+</html>
