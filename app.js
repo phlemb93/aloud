@@ -121,6 +121,7 @@ speakersSelector.addEventListener('click', () => {
 
  //Clear Text-Box
  closeBtn.addEventListener('click', () => {
+     synth.cancel();
      textBox.value = '';
      pauseBtn.style.display = 'none';
      playBtn.style.display = 'inline-block';
