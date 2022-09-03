@@ -1,84 +1,131 @@
-const textBox = document.querySelector('#text-box');
-const playBtn = document.querySelector('#play');
-const pauseBtn = document.querySelector('#pause');
-const closeBtn = document.querySelector('#close');
-const speakersSelector = document.querySelector('#speakers-selector');
-const speakers = document.querySelector('#speakers');
+const textBox = document.getElementById('text-box');
+const playBtn = document.getElementById('play');
+const pauseBtn = document.getElementById('pause');
+const closeBtn = document.getElementById('close');
+const speakersSelector = document.getElementById('speakers-selector');
+const speakers = document.getElementById('speakers');
 
-let voices = [];
 
 //Initiate Speech Synthesis
-let speech = new SpeechSynthesisUtterance();
+const synth = window.speechSynthesis;
 
-//Speak Text in the Text-Box
+
+//GET SPEAKERS 
+let voices = [];
+
+function getSpeakers() {
+
+    voices = synth.getVoices();
+
+      voices.forEach(voice => {
+          let option = document.createElement('option');
+  
+          option.value = voice.name;
+          option.innerText = `${voice.name} (${voice.lang})`;
+  
+          option.setAttribute('data-lang', voice.lang);
+          option.setAttribute('data-name', voice.name);
+
+          speakers.appendChild(option);
+      })
+  }
+
+getSpeakers();
+if (synth.onvoiceschanged !== undefined) {
+    synth.onvoiceschanged = getSpeakers; 
+  }
+ 
+
+//SPEAK TEXT IN THE TEXT-BOX
 playBtn.addEventListener('click', () => {
 
-    let text = textBox.value;
+    //Set Speech Text
+    const text = textBox.value;
+    const speakText = new SpeechSynthesisUtterance(text);
 
-    //Set Text
-    speech.text = text;
+    if(synth.speaking) {
+        console.log('A speaker is already speaking');
+        return;
+    }
 
-    //Speak Text
-    speechSynthesis.speak(speech);
+    if(textBox.value !== '') {
 
-    //Pause Button Appear 
-    setTimeout(() => {
         playBtn.style.display = 'none';
         pauseBtn.style.display = 'inline-block';
-    }, 500)
+
+        //Speech End
+        speakText.onend = (e) => {
+            pauseBtn.style.display = 'none';
+            playBtn.style.display = 'inline-block';
+        }
+
+        //Select Speaker
+        let selectedSpeaker = speakers.selectedOptions[0].getAttribute('data-name');
+        
+        voices.forEach(voice => {
+           if(voice.name === selectedSpeaker) {
+                speakText.voice = voice;
+            }
+        });
+
+        //Speak
+        synth.speak(speakText);
+    
+    }
+
+    
 })
 
-//Change Speaker
+//CHANGE SPEAKER
 speakers.addEventListener('change', (e) => {
 
-    console.log(e.target.value);
-    speech.voice = e.target.value;
-
-    // speech.voice = voices.find(voice => {
-    //     voice.name === e.target.value;
-
-    //     console.log(voice.name === 'Alex');
-
-    // })
- 
-})
-
-//Pause Button Disappear on Keyboard Press
-textBox.addEventListener('keydown', () => {
-    setTimeout(() => {
-        pauseBtn.style.display = 'none';
-        playBtn.style.display = 'inline-block';
-    }, 200)
+      //Set Speech Text
+      const text = textBox.value;
+      const speakText = new SpeechSynthesisUtterance(text);
+  
+      if(synth.speaking) {
+          console.log('A speaker is already speaking');
+          return;
+      }
+  
+      if(textBox.value !== '') {
+  
+          playBtn.style.display = 'none';
+          pauseBtn.style.display = 'inline-block';
+  
+          //Speech End
+          speakText.onend = (e) => {
+              pauseBtn.style.display = 'none';
+              playBtn.style.display = 'inline-block';
+          }
+  
+          //Select Speaker
+          let selectedSpeaker = speakers.selectedOptions[0].getAttribute('data-name');
+          
+          voices.forEach(voice => {
+             if(voice.name === selectedSpeaker) {
+                  speakText.voice = voice;
+              }
+          });
+  
+          //Speak
+          synth.speak(speakText);
+      
+      }
 })
 
 //Toggle Speakers Box
 speakersSelector.addEventListener('click', () => {
     speakers.classList.toggle('show-speakers');  
  })
- 
+
  //Clear Text-Box
  closeBtn.addEventListener('click', () => {
      textBox.value = '';
+     pauseBtn.style.display = 'none';
+     playBtn.style.display = 'inline-block';
+     speakers.classList.remove('show-speakers');  
  })
 
-//Get Speakers 
-function getSpeakers() {
-  voices = speechSynthesis.getVoices();
-
-    voices.forEach(voice => {
-        let option = document.createElement('option');
-
-        option.value = voice.name;
-        option.innerText = `${voice.name} ${voice.lang}`;
-
-        speakers.appendChild(option);
-    })
-}
-
-//Set Speech Voice Change
-speechSynthesis.addEventListener('voiceschanged', getSpeakers);
-getSpeakers();
-
-//Speak The Text 
 
 

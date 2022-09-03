@@ -9,30 +9,41 @@
 </head>
 <body>
 
-<div class="header">
-    <div class="left"><strong>A</strong>loud</div>
+    <header>
+        <div class="header">
+            <div class="left"><strong>A</strong>loud</div>
+        
+            <div class="center">
+                <span class="play" id="play"><i class="fa fa-play-circle"></i></span>
+                <span class="pause" id="pause"><i class="fa fa-pause-circle"></i></span>
+            </div>
+        
+            <div class="right">
+                <span class="speakers-selector" id="speakers-selector"><i class="fa fa-microphone-alt"></i></span>
+            </div>
+        
+            <select name="Speakers" id="speakers" class="speakers">
+            </select>
+        </div>
+    </header>
 
-    <div class="center">
-        <span class="play" id="play"><i class="fa fa-play-circle"></i></span>
-        <span class="pause" id="pause"><i class="fa fa-pause-circle"></i></span>
-    </div>
+    <main>
+        <div class="main">
+            <textarea class="text-box" id="text-box" placeholder="Type here..."></textarea>
+            <div id="close" class="close">+</div>
+        </div>
+    </main>
 
-    <div class="right">
-        <span class="speakers-selector" id="speakers-selector"><i class="fa fa-microphone-alt"></i></span>
-    </div>
-</div>
-
-<div class="main">
-    <textarea class="text-box" id="text-box" placeholder="Type here..."></textarea>
-    <div id="close" class="close">+</div>
-</div>
-
-<select name="Speakers" id="speakers" class="speakers">
-</select>
+    <footer>
+        <div class="footer">
+                <p>connect with me</p>
+                <a class="icon twitter-icon" href="https://twitter.com/Phlemb2" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a class="icon linkedin-icon" href="https://www.linkedin.com/in/oluwafemi-badrudeen/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a class="icon github-icon" href="https://github.com/phlemb93" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
 
 
-
-<! -- Save to Local Storage Using Git -->
 
 <script src="/app.js"></script>    
 </body>
