@@ -1,5 +1,6 @@
 const textBox = document.getElementById('text-box');
 const playBtn = document.getElementById('play');
+const resumeBtn = document.getElementById('resume');
 const pauseBtn = document.getElementById('pause');
 const closeBtn = document.getElementById('close');
 const speakersSelector = document.getElementById('speakers-selector');
@@ -41,21 +42,20 @@ playBtn.addEventListener('click', () => {
 
     //Set Speech Text
     const text = textBox.value;
-    const speakText = new SpeechSynthesisUtterance(text);
+    const utter = new SpeechSynthesisUtterance(text);
+     
 
-    if(synth.speaking) {
-        console.log('A speaker is already speaking');
-        return;
-    }
+    if(text !== '') {
 
-    if(textBox.value !== '') {
-
-        playBtn.style.display = 'none';
-        pauseBtn.style.display = 'inline-block';
+          playBtn.style.display = 'none';
+          resumeBtn.style.display = 'none';
+          pauseBtn.style.display = 'inline-block';
+  
 
         //Speech End
-        speakText.onend = (e) => {
+        utter.onend = (e) => {
             pauseBtn.style.display = 'none';
+            resumeBtn.style.display = 'none';
             playBtn.style.display = 'inline-block';
         }
 
@@ -64,16 +64,14 @@ playBtn.addEventListener('click', () => {
         
         voices.forEach(voice => {
            if(voice.name === selectedSpeaker) {
-                speakText.voice = voice;
+                utter.voice = voice;
             }
         });
 
         //Speak
-        synth.speak(speakText);
-    
+        synth.cancel();
+        synth.speak(utter);  
     }
-
-    
 })
 
 //CHANGE SPEAKER
@@ -81,22 +79,19 @@ speakers.addEventListener('change', (e) => {
 
       //Set Speech Text
       const text = textBox.value;
-      const speakText = new SpeechSynthesisUtterance(text);
-  
-      if(synth.speaking) {
-          console.log('A speaker is already speaking');
-          return;
-      }
-  
+      const utter = new SpeechSynthesisUtterance(text);
+
       if(textBox.value !== '') {
   
           playBtn.style.display = 'none';
+          resumeBtn.style.display = 'none';
           pauseBtn.style.display = 'inline-block';
   
           //Speech End
-          speakText.onend = (e) => {
-              pauseBtn.style.display = 'none';
-              playBtn.style.display = 'inline-block';
+          utter.onend = (e) => {
+            pauseBtn.style.display = 'none';
+            resumeBtn.style.display = 'none';
+            playBtn.style.display = 'inline-block';
           }
   
           //Select Speaker
@@ -104,12 +99,13 @@ speakers.addEventListener('change', (e) => {
           
           voices.forEach(voice => {
              if(voice.name === selectedSpeaker) {
-                  speakText.voice = voice;
+                  utter.voice = voice;
               }
           });
   
           //Speak
-          synth.speak(speakText);
+          synth.cancel();
+          synth.speak(utter);
       
       }
 })
@@ -123,10 +119,25 @@ speakersSelector.addEventListener('click', () => {
  closeBtn.addEventListener('click', () => {
      synth.cancel();
      textBox.value = '';
-     pauseBtn.style.display = 'none';
-     playBtn.style.display = 'inline-block';
      speakers.classList.remove('show-speakers');  
  })
 
+ //Pause The Speech
+pauseBtn.addEventListener('click', () => {
+    synth.pause()
 
+    pauseBtn.style.display = 'none';
+    playBtn.style.display = 'none';
+    resumeBtn.style.display = 'inline-block';
+})
 
+resumeBtn.addEventListener('click', () => {
+    synth.resume()
+
+    resumeBtn.style.display = 'none';
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = 'inline-block';
+})
+
+//Stop Play When The Page Reloads
+window.onload = synth.cancel();

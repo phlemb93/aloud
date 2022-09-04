@@ -39,11 +39,11 @@ body {
     font-size: 50px;
     color: #737DBF;
 }
-.header .center .play i:hover {
+.header .center .play i:hover, .header .center .resume i:hover {
     transition: all ease-out 0.7s;
     transform: rotate(360deg);
 }
-.center .pause {
+.center .pause, .center .resume{
     display: none;
 }
 
@@ -91,7 +91,7 @@ body {
     padding: 40px 40px;
     border-radius: 10px;
     border: none;
-    box-shadow: 5px 5px 50px gray;
+    box-shadow: 4px 4px 16px #737DBF;
     background-color: #F8F9F7;
     font-size: 18px;
 }
