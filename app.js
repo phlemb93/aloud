@@ -119,7 +119,12 @@ speakersSelector.addEventListener('click', () => {
  closeBtn.addEventListener('click', () => {
      synth.cancel();
      textBox.value = '';
-     speakers.classList.remove('show-speakers');  
+     speakers.classList.remove('show-speakers'); 
+     
+     //The pause button doesn't disappear on mobile browsers
+     pauseBtn.style.display = 'none';
+     resumeBtn.style.display = 'none';
+     playBtn.style.display = 'inline-block';
  })
 
  //Pause The Speech
@@ -131,6 +136,7 @@ pauseBtn.addEventListener('click', () => {
     resumeBtn.style.display = 'inline-block';
 })
 
+ //Resume The Speech
 resumeBtn.addEventListener('click', () => {
     synth.resume()
 
