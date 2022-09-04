@@ -90,9 +90,8 @@ body {
     margin-top: 50px;
     padding: 40px 40px;
     border-radius: 10px;
-    /* border: 1px solid #E16E69;; */
-    border: none;
-    box-shadow: 4px 4px 20px #E16E69;;
+    border: 1px solid #737DBF;
+    /* box-shadow: 4px 4px 20px #E16E69;; */
     background-color: #F8F9F7;
     font-size: 18px;
 }
