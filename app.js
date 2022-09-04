@@ -60,7 +60,7 @@ playBtn.addEventListener('click', () => {
         }
 
         //Select Speaker
-        let selectedSpeaker = speakers.selectedOptions[0].getAttribute('data-name');
+        let selectedSpeaker = speakers.selectedOptions[6].getAttribute('data-name');
         
         voices.forEach(voice => {
            if(voice.name === selectedSpeaker) {
@@ -95,7 +95,7 @@ speakers.addEventListener('change', (e) => {
           }
   
           //Select Speaker
-          let selectedSpeaker = speakers.selectedOptions[0].getAttribute('data-name');
+          let selectedSpeaker = speakers.selectedOptions[6].getAttribute('data-name');
           
           voices.forEach(voice => {
              if(voice.name === selectedSpeaker) {
@@ -118,10 +118,11 @@ speakersSelector.addEventListener('click', () => {
  //Clear Text-Box
  closeBtn.addEventListener('click', () => {
      synth.cancel();
+
      textBox.value = '';
      speakers.classList.remove('show-speakers'); 
      
-     //The pause button doesn't disappear on mobile browsers
+     //Too remove the pause button on mobile browsers
      pauseBtn.style.display = 'none';
      resumeBtn.style.display = 'none';
      playBtn.style.display = 'inline-block';
