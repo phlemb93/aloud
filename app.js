@@ -60,7 +60,7 @@ playBtn.addEventListener('click', () => {
         }
 
         //Select Speaker
-        let selectedSpeaker = speakers.selectedOptions[6].getAttribute('data-name');
+        let selectedSpeaker = speakers.selectedOptions[0].getAttribute('data-name');
         
         voices.forEach(voice => {
            if(voice.name === selectedSpeaker) {
@@ -95,7 +95,7 @@ speakers.addEventListener('change', (e) => {
           }
   
           //Select Speaker
-          let selectedSpeaker = speakers.selectedOptions[6].getAttribute('data-name');
+          let selectedSpeaker = speakers.selectedOptions[0].getAttribute('data-name');
           
           voices.forEach(voice => {
              if(voice.name === selectedSpeaker) {
