@@ -82,6 +82,7 @@ body {
     align-items: center;
     position: relative;
     transition: all ease-in-out 1s;
+    overflow: hidden;
 }
 
 .main textarea {
@@ -90,8 +91,7 @@ body {
     margin-top: 50px;
     padding: 40px 40px;
     border-radius: 10px;
-    border: 1px solid #737DBF;
-    /* box-shadow: 4px 4px 20px #E16E69;; */
+    border: 1px solid #C6D1E0;
     background-color: #F8F9F7;
     font-size: 18px;
 }
