@@ -8,6 +8,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    height: 100%;
+    overflow: hidden;
 }
 
 .header {
@@ -82,7 +84,6 @@ body {
     align-items: center;
     position: relative;
     transition: all ease-in-out 1s;
-    overflow: hidden;
 }
 
 .main textarea {
